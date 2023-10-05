@@ -15,17 +15,15 @@ def lambda_handler(event, context):
                                  database = os.environ['DB_NAME'])
     
     cur = connection.cursor(pymysql.cursors.SSCursor)  
-    #cur = db.cursor(pymysql.cursors.DictCursor)
     sql = "SELECT * FROM bank LIMIT 100;"
     cur.execute(sql)
     
     now = datetime.datetime.now()
     timestamp = now.strftime("%Y-%m-%d %H:%M:%S" )
-    rows_to_insert = [] 
-    # Transform
-    #line_count = 0
-    #batch_size = 40
+
     client = boto3.client('redshift-data') 
+    
+    # Transform
     for row in cur:
         print(row[1],row[2],timestamp)
         
