@@ -21,7 +21,6 @@ def lambda_handler(event, context):
     now = datetime.datetime.now()
     timestamp = now.strftime("%Y-%m-%d %H:%M:%S" )
 
-    client = boto3.client('redshift-data') 
     
     # Transform
     for row in cur:
